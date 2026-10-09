@@ -25,9 +25,12 @@ allprojects {
         maven { url 'https://maven.isxander.dev/releases' }
         maven { url 'https://maven.terraformersmc.com/' }
         maven { url 'https://thedarkcolour.github.io/KotlinForForge/' }
+        // Modrinth's official maven is the authoritative source for maven.modrinth:*
+        // coordinates; check it BEFORE third-party mirrors (maven.latvian.dev currently
+        // answers 530, which aborts Gradle resolution instead of falling through).
+        maven { url 'https://api.modrinth.com/maven' }
         maven { url 'https://maven.latvian.dev/releases' }
         maven { url 'https://jitpack.io' }
-        maven { url 'https://api.modrinth.com/maven' }
         maven { url 'https://repo.minebench.de/' }
         mavenCentral()
     }

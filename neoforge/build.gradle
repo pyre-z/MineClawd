@@ -25,8 +25,10 @@ dependencies {
 
     modCompileOnly "dev.isxander:yet-another-config-lib:${rootProject.yacl_forge_version}"
     modCompileOnly "maven.modrinth:better-modlist:${rootProject.better_modlist_forge_version}"
-    modCompileOnly "dev.latvian.mods:kubejs-forge:${rootProject.kubejs_forge_version}"
-    modCompileOnly "dev.latvian.mods:rhino-forge:${rootProject.rhino_forge_version}"
+    // KubeJS / Rhino 的 Forge 变体改从 Modrinth 官方 maven 解析：
+    // maven.latvian.dev 全站返回 530，会让 Gradle 直接中断依赖解析（不会 fallback）。
+    modCompileOnly "maven.modrinth:kubejs:${rootProject.kubejs_forge_version}+forge"
+    modCompileOnly "maven.modrinth:rhino:${rootProject.rhino_forge_version}+forge"
 
     forgeRuntimeLibrary "de.themoep:minedown-adventure:${rootProject.minedown_version}"
     forgeRuntimeLibrary "net.kyori:adventure-api:${rootProject.adventure_version}"
