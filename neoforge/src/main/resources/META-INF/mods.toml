@@ -6,6 +6,11 @@ license="Apache-2.0"
 modId="mineclawd"
 version="${version}"
 displayName="MineClawd"
+# Server-side mod: clients may connect WITHOUT installing it (no red X, no rejection).
+# Forge's default (MATCH_VERSION) would flag any client that lacks the mod as incompatible.
+# IGNORE_SERVER_VERSION = "present on the server but absent on the client is fine" —
+# the overlay GUI is simply unavailable for clients that don't install it.
+displayTest="IGNORE_SERVER_VERSION"
 description='''Bring OpenClaw into Minecraft! The Minecraft Agent that actually do things.'''
 displayURL="https://github.com/Zhou-Shilin/MineClawd"
 logoFile="assets/mineclawd/icon.png"
