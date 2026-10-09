@@ -26,10 +26,14 @@ allprojects {
         maven { url 'https://maven.terraformersmc.com/' }
         maven { url 'https://thedarkcolour.github.io/KotlinForForge/' }
         // Modrinth's official maven is the authoritative source for maven.modrinth:*
-        // coordinates; check it BEFORE third-party mirrors (maven.latvian.dev currently
-        // answers 530, which aborts Gradle resolution instead of falling through).
+        // coordinates, and is checked first.
         maven { url 'https://api.modrinth.com/maven' }
-        maven { url 'https://maven.latvian.dev/releases' }
+        // NOTE: maven.latvian.dev is intentionally NOT listed. It answers Cloudflare 530
+        // for every request (whole host down), and Gradle treats a 5xx as a hard failure
+        // instead of falling through to the next repository — which aborts resolution of
+        // unrelated artifacts (e.g. dev.architectury:mixin-patched). KubeJS / Rhino now
+        // resolve from Modrinth (see neoforge/build.gradle). Re-add this entry if the
+        // author's maven recovers and you need dev.latvian.mods:* coordinates again.
         maven { url 'https://jitpack.io' }
         maven { url 'https://repo.minebench.de/' }
         mavenCentral()
