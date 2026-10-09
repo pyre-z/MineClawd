@@ -82,6 +82,13 @@ shadowJar {
     configurations = [project.configurations.shadowBundle]
     exclude "com/google/gson/**"
     exclude "META-INF/maven/com.google.code.gson/**"
+    // Exclude compile-time-only annotation packages pulled in transitively
+    // (flexmark / adventure -> org.jetbrains.annotations, org.intellij.lang.annotations).
+    // They are not needed at runtime, and bundling them collides with identically named
+    // packages exported by other mods (e.g. create-track-map) in Forge's module layer,
+    // which fails startup with java.lang.module.ResolutionException.
+    exclude "org/jetbrains/**"
+    exclude "org/intellij/**"
     exclude "fabric.mod.json"
     exclude "architectury.common.json"
     archiveClassifier = "dev-shadow"

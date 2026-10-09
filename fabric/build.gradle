@@ -68,6 +68,10 @@ shadowJar {
     configurations = [project.configurations.shadowBundle]
     exclude "com/google/gson/**"
     exclude "META-INF/maven/com.google.code.gson/**"
+    // See neoforge/build.gradle: these transitively bundled compile-time annotations
+    // collide with other mods' module packages in Forge's module layer.
+    exclude "org/jetbrains/**"
+    exclude "org/intellij/**"
     exclude "architectury.common.json"
     archiveClassifier = "dev-shadow"
     zip64 true
